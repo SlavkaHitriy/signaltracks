@@ -146,6 +146,7 @@ export const Map = ({ sx, rerenderDependencies }) => {
     };
 
     const handleStorageChange = useDebouncedCallback(() => {
+        map.current.remove();
         renderMap();
     }, 500);
 
