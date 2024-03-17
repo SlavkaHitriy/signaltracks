@@ -39,6 +39,9 @@ export const DefaultDataGrid = ({
                     '&:last-of-type .MuiDataGrid-columnSeparator': {
                         display: 'none',
                     },
+                    '&:first-of-type': {
+                        pl: 3,
+                    },
                 },
                 '.MuiDataGrid-columnHeaders': {
                     border: 'none',
@@ -58,6 +61,9 @@ export const DefaultDataGrid = ({
                     border: 'none',
                     '&:focus': {
                         outline: 'none',
+                    },
+                    '&:first-of-type': {
+                        pl: 3,
                     },
                 },
                 '.MuiDataGrid-row': {

@@ -3,10 +3,13 @@ import { Box } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { geojson } from './data/geojson.js';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { sidebarOpened } from '@/core/store/index.js';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2xhdmthaGl0cml5IiwiYSI6ImNsYnpmNmV5cTBiMHIzbnFxejhibXJqd3MifQ.kaeD3uS6BI6qF1wV0w4lrw';
 
 export const Map = ({ sx, rerenderDependencies }) => {
+    const isOpenedSidebar = useRecoilValue(sidebarOpened);
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lng, setLng] = useState(-74.01521529520066);
@@ -166,12 +169,8 @@ export const Map = ({ sx, rerenderDependencies }) => {
     }, [rerenderDependencies]);
 
     useEffect(() => {
-        window.addEventListener('storage', handleStorageChange);
-
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
-    }, []);
+        handleStorageChange();
+    }, [isOpenedSidebar]);
 
     return (
         <Box

@@ -1,5 +1,5 @@
 import { Box, ButtonBase, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DefaultCircularProgress } from '@/ui/DefaultCircularProgress/index.js';
 import { ArrowIcon } from '@/assets/icons/ArrowIcon.jsx';
 import { Dropdown } from '@/ui/Dropdown/index.js';
@@ -9,8 +9,18 @@ import { PlusIcon } from '@/assets/icons/PlusIcon.jsx';
 import { AssetItem } from '@/modules/AssetMapView/AssetItem.jsx';
 import { items } from './data/items.js';
 import { Map } from '@/components/Map/Map.jsx';
+import { Fullscreen, FullscreenExit } from '@mui/icons-material';
+import { useSetRecoilState } from 'recoil';
+import { sidebarOpened } from '@/core/store/index.js';
 
 export const AssetMapView = () => {
+    const [isFullMap, setIsFullMap] = useState(false);
+    const setIsOpenedSidebar = useSetRecoilState(sidebarOpened);
+
+    useEffect(() => {
+        setIsOpenedSidebar(!isFullMap);
+    }, [isFullMap]);
+
     return (
         <Stack width={'100%'}>
             <Stack p={3} gap={2}>
@@ -119,7 +129,15 @@ export const AssetMapView = () => {
                 </Stack>
             </Stack>
             <Stack flex={1} borderTop={'1px solid #E1E3E8'} direction={'row'}>
-                <Box width={350} flexShrink={0} borderRight={'1px solid #E1E3E8'}>
+                <Box
+                    width={isFullMap ? 0 : 350}
+                    flexShrink={0}
+                    borderRight={'1px solid #E1E3E8'}
+                    overflow={'hidden'}
+                    sx={{
+                        transition: 'all 0.15s ease',
+                    }}
+                >
                     {items.map((item, index) => (
                         <AssetItem
                             key={`asset-item-${index}`}
@@ -130,7 +148,41 @@ export const AssetMapView = () => {
                         />
                     ))}
                 </Box>
-                <Box flex={1} overflow={'hidden'}>
+                <Box flex={1} overflow={'hidden'} position={'relative'}>
+                    <ButtonBase
+                        onClick={() => setIsFullMap(!isFullMap)}
+                        sx={{
+                            position: 'absolute',
+                            top: 10,
+                            right: 10,
+                            zIndex: 1,
+                            width: 40,
+                            height: 40,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            bgcolor: 'primary.main',
+                            borderRadius: '50%',
+                            boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                        }}
+                    >
+                        {isFullMap && (
+                            <FullscreenExit
+                                sx={{
+                                    color: 'common.white',
+                                    transform: 'translateX(1px)',
+                                }}
+                            />
+                        )}
+                        {!isFullMap && (
+                            <Fullscreen
+                                sx={{
+                                    color: 'common.white',
+                                    transform: 'translateX(1px)',
+                                }}
+                            />
+                        )}
+                    </ButtonBase>
                     <Map />
                 </Box>
             </Stack>

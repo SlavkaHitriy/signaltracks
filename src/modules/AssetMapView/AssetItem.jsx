@@ -17,7 +17,7 @@ export const AssetItem = ({ title, temp, speed, tags }) => {
             }}
         >
             <Stack gap={1}>
-                <Typography fontWeight={500} fontSize={14} color={'secondary.main'}>
+                <Typography fontWeight={500} fontSize={14} color={'secondary.main'} whiteSpace={'nowrap'}>
                     {title}
                 </Typography>
                 <Stack direction={'row'} alignItems={'center'} gap={2}>
@@ -32,8 +32,12 @@ export const AssetItem = ({ title, temp, speed, tags }) => {
                             />
                         ))}
                     </Stack>
-                    <Typography fontSize={12}>{temp} °F</Typography>
-                    <Typography fontSize={12}>{speed} mph</Typography>
+                    <Typography whiteSpace={'nowrap'} fontSize={12}>
+                        {temp} °F
+                    </Typography>
+                    <Typography whiteSpace={'nowrap'} fontSize={12}>
+                        {speed} mph
+                    </Typography>
                 </Stack>
             </Stack>
             <ExpandMore
