@@ -1,17 +1,25 @@
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import { ArrowForwardIos } from '@mui/icons-material';
 
 export const Datepicker = () => {
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateTimePicker
+                slots={{
+                    openPickerIcon: ArrowForwardIos,
+                }}
+                views={['year', 'month', 'day']}
                 sx={{
+                    width: '150px',
                     borderRadius: '5px',
-                    backgroundColor: '#F5F7FB',
+                    bgcolor: 'common.white',
+                    border: '1px solid #E2E2EA',
+                    overflow: 'hidden',
                     '.MuiOutlinedInput-input': {
-                        p: '0 20px',
-                        height: '45px',
+                        p: '0 12px',
+                        height: '40px',
                         order: 2,
                     },
                     '.MuiInputBase-root': {
@@ -25,21 +33,22 @@ export const Datepicker = () => {
                         p: '0',
                     },
                     '.MuiIconButton-root': {
-                        width: '65px',
+                        width: '100%',
                         mr: '0',
-                        borderRadius: '5px',
-                        height: '45px',
-                        '&::after': {
-                            content: "''",
-                            position: 'absolute',
-                            height: 25,
-                            width: '1px',
-                            backgroundColor: 'grey.light',
-                            right: 0,
+                        height: '100%',
+                        position: 'absolute',
+                        borderRadius: '0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        svg: {
+                            width: '16px',
+                            height: '16px',
+                            transform: 'rotate(90deg)',
                         },
                     },
                 }}
-                defaultValue={dayjs('2022-04-17')}
+                defaultValue={dayjs('2024-01-24')}
             />
         </LocalizationProvider>
     );

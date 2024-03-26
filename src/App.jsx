@@ -9,6 +9,7 @@ import { MachinesDetails } from '@/modules/MachinesDetails/index.js';
 import { MachinesNew } from '@/modules/MachinesNew/index.js';
 import { AssetMapView } from '@/modules/AssetMapView/index.js';
 import { AssetListing } from '@/modules/AssetListing/index.js';
+import { Asset } from '@/modules/Asset/index.js';
 
 export const App = () => {
     const location = useLocation();
@@ -24,6 +25,7 @@ export const App = () => {
 
                         {/*<Route path='/dashboard' element={<Dashboard />} />*/}
                         <Route path='/asset-mapview' element={<AssetMapView />} />
+                        <Route path='/asset/1' element={<Asset />} />
                         <Route path='/asset-listing' element={<AssetListing />} />
                         {/*<Route path='/devices' element={<Dashboard />} />*/}
                         {/*<Route path='/events' element={<Dashboard />} />*/}

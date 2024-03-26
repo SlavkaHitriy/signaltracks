@@ -33,6 +33,7 @@ export const DefaultSelect = ({ sx, label, helperText, helperTextColor, defaultV
                             border: '1px solid #E2E2EA',
                             borderRadius: '6px',
                             height: 30,
+                            overflow: 'hidden',
                             '&::before': {
                                 border: 'none',
                             },

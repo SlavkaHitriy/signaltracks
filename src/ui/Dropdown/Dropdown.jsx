@@ -4,7 +4,7 @@ import { KeyboardArrowDown } from '@mui/icons-material';
 import styles from './index.module.scss';
 import { ArrowDownIcon } from '@/assets/icons/ArrowDownIcon.jsx';
 
-export const Dropdown = ({ children, ...otherProps }) => {
+export const Dropdown = ({ children, customChildren, ...otherProps }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -30,9 +30,7 @@ export const Dropdown = ({ children, ...otherProps }) => {
                 }}
                 {...otherProps}
             >
-                <MenuItem onClick={handleClose}>Test 1</MenuItem>
-                <MenuItem onClick={handleClose}>Test 2</MenuItem>
-                <MenuItem onClick={handleClose}>Test 3</MenuItem>
+                sdflkjfsd
             </Menu>
         </div>
     );

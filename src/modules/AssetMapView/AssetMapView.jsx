@@ -12,6 +12,7 @@ import { Map } from '@/components/Map/Map.jsx';
 import { Fullscreen, FullscreenExit } from '@mui/icons-material';
 import { useSetRecoilState } from 'recoil';
 import { sidebarOpened } from '@/core/store/index.js';
+import { MapView } from '@/components/Map/MapView.jsx';
 
 export const AssetMapView = () => {
     const [isFullMap, setIsFullMap] = useState(false);
@@ -183,7 +184,7 @@ export const AssetMapView = () => {
                             />
                         )}
                     </ButtonBase>
-                    <Map />
+                    <MapView />
                 </Box>
             </Stack>
         </Stack>

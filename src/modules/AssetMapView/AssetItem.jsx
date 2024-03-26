@@ -1,8 +1,11 @@
 import { Stack, Typography } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import { Tag } from '@/ui/Tag/index.js';
+import { useNavigate } from 'react-router-dom';
 
 export const AssetItem = ({ title, temp, speed, tags }) => {
+    const navigate = useNavigate();
+
     return (
         <Stack
             direction={'row'}
@@ -15,6 +18,7 @@ export const AssetItem = ({ title, temp, speed, tags }) => {
             sx={{
                 cursor: 'pointer',
             }}
+            onClick={() => navigate('/asset/1')}
         >
             <Stack gap={1}>
                 <Typography fontWeight={500} fontSize={14} color={'secondary.main'} whiteSpace={'nowrap'}>
