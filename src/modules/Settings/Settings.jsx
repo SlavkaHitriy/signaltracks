@@ -1,323 +1,542 @@
 import { Box, ButtonBase, Grid, Stack, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { tabs } from '@/modules/Settings/data/tabs.js';
+import React, { useState } from 'react';
+import { Dropdown } from '@/ui/Dropdown/index.js';
 import { SearchInput } from '@/components/SearchInput/index.js';
+import { tabs } from './data/tabs.js';
+import { Tabs } from '@/ui/Tabs/index.js';
+import { PlusIcon } from '@/assets/icons/PlusIcon.jsx';
 import { DefaultDataGrid } from '@/ui/DefaultDataGrid/index.js';
-import { columns, rows } from './data/sensors.jsx';
+import { usersColumns, usersRows } from '@/modules/Settings/data/users.jsx';
+import { configurationTabs } from './data/configurationTabs.js';
 import { DefaultSelect } from '@/ui/DefaultSelect/index.js';
-import { DefaultButton } from '@/ui/DefaultButton/index.js';
-import { Popup } from '@/components/Popup/index.js';
-import { DefaultInput } from '@/ui/DefaultInput/index.js';
+import { groupsColumns, groupsRows } from '@/modules/Settings/data/groups.jsx';
+import { categoriesColumns, categoriesRows } from '@/modules/Settings/data/categories.jsx';
+import { typesColumns, typesRows } from '@/modules/Settings/data/types.jsx';
+import { companyTabs } from '@/modules/Settings/data/companyTabs.js';
 import { ColorStatus } from '@/ui/ColorStatus/index.js';
-import { columnsUsers, rowsUsers } from '@/modules/Settings/data/users.jsx';
 
 export const Settings = () => {
     const [activeTab, setActiveTab] = useState(tabs[0].value);
-    const [isOpenedSensorDetails, setIsOpenedSensorDetails] = useState(false);
-    const [isOpenedUserDetails, setIsOpenedUserDetails] = useState(false);
+    const [configurationTab, setConfigurationTab] = useState(configurationTabs[0].value);
+    const [companyTab, setCompanyTab] = useState(companyTabs[0].value);
 
-    useEffect(() => {
-        setIsOpenedUserDetails(false);
-        setIsOpenedSensorDetails(false);
-    }, [activeTab]);
+    const handleChangeTab = (tab) => {
+        setActiveTab(tab);
+    };
+
+    const handleChangeConfigurationTab = (tab) => {
+        setConfigurationTab(tab);
+    };
+
+    const handleChangeCompanyTab = (tab) => {
+        setCompanyTab(tab);
+    };
 
     return (
-        <Stack p={2.5} width={'100%'}>
-            <Box bgcolor={'#F6F6F7'} p={2} pt={0} borderRadius={'10px 10px 0 0'} border={'1px solid #DBDDE2'}>
-                <Stack mb={3} direction={'row'} justifyContent={'space-between'} spacing={3} alignItems={'center'}>
-                    <Stack direction={'row'} borderBottom={'1px solid #DBDDE2'}>
-                        {tabs.map(({ id, label, value }) => (
+        <Stack flex={1}>
+            <Stack p={3} gap={2}>
+                <Stack direction={'row'} gap={4} justifyContent={'space-between'} alignItems={'center'}>
+                    <SearchInput />
+                    <Stack direction={'row'} alignItems={'center'} gap={1}>
+                        <Box width={32} height={32} bgcolor={'primary.main'} borderRadius={'50%'} />
+                        <Dropdown>
+                            <Box>
+                                <Typography fontSize={14} fontWeight={500}>
+                                    Austin Robertson
+                                </Typography>
+                                <Typography fontSize={12} color={'#696974'}>
+                                    Marketing Administrator
+                                </Typography>
+                            </Box>
+                        </Dropdown>
+                    </Stack>
+                </Stack>
+            </Stack>
+            <Stack pl={3} flex={1}>
+                <Stack
+                    px={3}
+                    py={2}
+                    width={'100% + 24px'}
+                    sx={{
+                        border: '1px solid #E2E2EA',
+                        borderRadius: '8px 0 0 8px',
+                        borderRight: 0,
+                    }}
+                    overflow={'hidden'}
+                    bgcolor={'#F5F7FB'}
+                    position={'relative'}
+                    mb={3}
+                >
+                    <Stack direction={'row'} gap={3} justifyContent={'space-between'} alignItems={'center'} mb={3}>
+                        <Tabs data={tabs} activeTab={activeTab} setActiveTab={handleChangeTab} />
+                        {activeTab === 'users' && (
                             <ButtonBase
-                                type={'button'}
-                                key={id}
                                 sx={{
-                                    px: 3,
-                                    py: 2,
-                                    position: 'relative',
+                                    height: 30,
+                                    px: 2,
+                                    py: 1,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 1,
+                                    bgcolor: 'secondary.main',
+                                    borderRadius: '6px',
                                 }}
-                                onClick={() => setActiveTab(value)}
                             >
-                                <Typography>{label}</Typography>
-                                {activeTab === value && (
-                                    <Box
-                                        width={'100%'}
-                                        position={'absolute'}
-                                        left={0}
-                                        bottom={0}
-                                        height={3}
-                                        bgcolor={'primary.main'}
-                                    />
-                                )}
+                                <PlusIcon />
+                                <Typography fontSize={14} color={'common.white'}>
+                                    Add User
+                                </Typography>
                             </ButtonBase>
-                        ))}
+                        )}
+                        {activeTab === 'groups' && (
+                            <ButtonBase
+                                sx={{
+                                    height: 30,
+                                    px: 2,
+                                    py: 1,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 1,
+                                    bgcolor: 'secondary.main',
+                                    borderRadius: '6px',
+                                }}
+                            >
+                                <PlusIcon />
+                                <Typography fontSize={14} color={'common.white'}>
+                                    Add Group
+                                </Typography>
+                            </ButtonBase>
+                        )}
+                        {activeTab === 'asset-configuration' && configurationTab === 'categories' && (
+                            <ButtonBase
+                                sx={{
+                                    height: 30,
+                                    px: 2,
+                                    py: 1,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 1,
+                                    bgcolor: 'secondary.main',
+                                    borderRadius: '6px',
+                                }}
+                            >
+                                <PlusIcon />
+                                <Typography fontSize={14} color={'common.white'}>
+                                    Category
+                                </Typography>
+                            </ButtonBase>
+                        )}
+                        {activeTab === 'asset-configuration' && configurationTab === 'types' && (
+                            <ButtonBase
+                                sx={{
+                                    height: 30,
+                                    px: 2,
+                                    py: 1,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 1,
+                                    bgcolor: 'secondary.main',
+                                    borderRadius: '6px',
+                                }}
+                            >
+                                <PlusIcon />
+                                <Typography fontSize={14} color={'common.white'}>
+                                    Add Type
+                                </Typography>
+                            </ButtonBase>
+                        )}
                     </Stack>
-                    {activeTab === 'sensors' && (
-                        <ButtonBase
-                            type={'button'}
-                            bgcolor={'blue.light'}
-                            onClick={() => setIsOpenedSensorDetails(true)}
-                            sx={{
-                                py: 1.5,
-                                px: 2,
-                                position: 'relative',
-                                boxShadow: '0px 3px 6px rgba(0 0 0 / 16%)',
-                                borderRadius: '5px',
-                            }}
-                        >
-                            + New Sensor
-                        </ButtonBase>
+                    {(activeTab === 'users' || activeTab === 'company') && (
+                        <>
+                            <Typography fontWeight={700} fontSize={14} mb={2}>
+                                User Manager
+                            </Typography>
+                            <Stack direction={'row'} gap={8} alignItems={'flex-end'} justifyContent={'space-between'}>
+                                <Stack direction={'row'} gap={8}>
+                                    <Stack gap={2}>
+                                        <Typography fontSize={14} color={'#A0A3A6'}>
+                                            Total Enrolled
+                                        </Typography>
+                                        <Stack direction={'row'} gap={3} alignItems={'flex-end'}>
+                                            <Typography fontSize={24} fontWeight={700} lineHeight={1}>
+                                                125
+                                            </Typography>
+                                            <Typography fontSize={14}>Users</Typography>
+                                        </Stack>
+                                    </Stack>
+                                    <Stack gap={2}>
+                                        <Typography fontSize={14} color={'#A0A3A6'}>
+                                            Active
+                                        </Typography>
+                                        <Typography fontSize={24} fontWeight={700} lineHeight={1}>
+                                            100
+                                        </Typography>
+                                    </Stack>
+                                    <Stack gap={2}>
+                                        <Typography fontSize={14} color={'#A0A3A6'}>
+                                            Disabled
+                                        </Typography>
+                                        <Typography fontSize={24} fontWeight={700} lineHeight={1}>
+                                            25
+                                        </Typography>
+                                    </Stack>
+                                    <Box
+                                        sx={{
+                                            width: '1px',
+                                            flexShrink: 0,
+                                            bgcolor: '#DADDE5',
+                                            height: 70,
+                                            alignSelf: 'center',
+                                        }}
+                                    />
+                                    <Stack gap={2}>
+                                        <Typography fontSize={14} color={'#A0A3A6'}>
+                                            Admin Users
+                                        </Typography>
+                                        <Typography fontSize={24} fontWeight={700} lineHeight={1}>
+                                            10
+                                        </Typography>
+                                    </Stack>
+                                    <Stack gap={2}>
+                                        <Typography fontSize={14} color={'#A0A3A6'}>
+                                            Standard Users
+                                        </Typography>
+                                        <Typography fontSize={24} fontWeight={700} lineHeight={1}>
+                                            115
+                                        </Typography>
+                                    </Stack>
+                                </Stack>
+                                <SearchInput
+                                    sx={{
+                                        bgcolor: 'common.white',
+                                        '.MuiButtonBase-root': {
+                                            bgcolor: 'common.white',
+                                        },
+                                    }}
+                                />
+                            </Stack>
+                        </>
                     )}
-
-                    {activeTab === 'users' && (
-                        <ButtonBase
-                            type={'button'}
-                            bgcolor={'blue.light'}
-                            onClick={() => setIsOpenedUserDetails(true)}
-                            sx={{
-                                py: 1.5,
-                                px: 2,
-                                position: 'relative',
-                                boxShadow: '0px 3px 6px rgba(0 0 0 / 16%)',
-                                borderRadius: '5px',
-                            }}
-                        >
-                            + New User
-                        </ButtonBase>
+                    {activeTab === 'groups' && (
+                        <>
+                            <Typography fontWeight={700} fontSize={14} mb={2}>
+                                Group Settings
+                            </Typography>
+                            <Stack direction={'row'} gap={8} alignItems={'flex-end'} justifyContent={'space-between'}>
+                                <Stack direction={'row'} gap={8}>
+                                    <Stack gap={2}>
+                                        <Typography fontSize={14} color={'#A0A3A6'}>
+                                            Total Enrolled
+                                        </Typography>
+                                        <Stack direction={'row'} gap={3} alignItems={'flex-end'}>
+                                            <Typography fontSize={24} fontWeight={700} lineHeight={1}>
+                                                15
+                                            </Typography>
+                                            <Typography fontSize={14}>Groups</Typography>
+                                        </Stack>
+                                    </Stack>
+                                    <Stack gap={2}>
+                                        <Typography fontSize={14} color={'#A0A3A6'}>
+                                            Active
+                                        </Typography>
+                                        <Typography fontSize={24} fontWeight={700} lineHeight={1}>
+                                            100
+                                        </Typography>
+                                    </Stack>
+                                    <Stack gap={2}>
+                                        <Typography fontSize={14} color={'#A0A3A6'}>
+                                            Inactive
+                                        </Typography>
+                                        <Typography fontSize={24} fontWeight={700} lineHeight={1}>
+                                            25
+                                        </Typography>
+                                    </Stack>
+                                </Stack>
+                                <SearchInput
+                                    sx={{
+                                        bgcolor: 'common.white',
+                                        '.MuiButtonBase-root': {
+                                            bgcolor: 'common.white',
+                                        },
+                                    }}
+                                />
+                            </Stack>
+                        </>
+                    )}
+                    {activeTab === 'asset-configuration' && (
+                        <>
+                            <Box mb={4}>
+                                <Tabs
+                                    data={configurationTabs}
+                                    activeTab={configurationTab}
+                                    setActiveTab={handleChangeConfigurationTab}
+                                />
+                            </Box>
+                            <Stack direction={'row'} gap={3}>
+                                <SearchInput
+                                    sx={{
+                                        bgcolor: 'common.white',
+                                        '.MuiButtonBase-root': {
+                                            bgcolor: 'common.white',
+                                        },
+                                    }}
+                                />
+                                {configurationTab === 'types' && (
+                                    <Box maxWidth={200} width={'100%'}>
+                                        <DefaultSelect
+                                            defaultValue={'Select Category'}
+                                            sx={{
+                                                bgcolor: 'common.white',
+                                            }}
+                                        />
+                                    </Box>
+                                )}
+                            </Stack>
+                        </>
                     )}
                 </Stack>
+                {activeTab === 'company' && (
+                    <Stack
+                        flex={1}
+                        width={'100% + 24px'}
+                        bgcolor={'#F5F7FB'}
+                        sx={{
+                            border: '1px solid #E2E2EA',
+                            borderRadius: '8px 0 0 8px',
+                            borderRight: 0,
+                        }}
+                        overflow={'hidden'}
+                        position={'relative'}
+                        px={3}
+                        py={2}
+                    >
+                        <Stack direction={'row'} gap={3} alignItems={'center'} justifyContent={'space-between'} mb={3}>
+                            <Box>
+                                <Tabs data={companyTabs} activeTab={companyTab} setActiveTab={handleChangeCompanyTab} />
+                            </Box>
+                            <Stack direction={'row'} gap={3}>
+                                <ButtonBase
+                                    sx={{
+                                        py: 1,
+                                        px: 3,
+                                        border: '1px solid #E2E2EA',
+                                        bgcolor: '#FCFCFE',
+                                        borderRadius: '5px',
+                                    }}
+                                >
+                                    <Typography fontSize={14} fontWeight={700}>
+                                        Edit
+                                    </Typography>
+                                </ButtonBase>
+                                <ButtonBase
+                                    sx={{
+                                        py: 1,
+                                        px: 3,
+                                        border: '1px solid #E2E2EA',
+                                        bgcolor: '#FCFCFE',
+                                        borderRadius: '5px',
+                                    }}
+                                >
+                                    <Typography color={'secondary.main'} fontSize={14} fontWeight={700}>
+                                        Save
+                                    </Typography>
+                                </ButtonBase>
+                            </Stack>
+                        </Stack>
+                        <Box>
+                            <Grid
+                                container
+                                spacing={3}
+                                sx={{
+                                    '& > div': {
+                                        '& > div': {
+                                            borderRight: '1px solid #E2E2EA',
+                                            pl: 3,
+                                            pr: 6,
+                                        },
+                                        '&:first-child': {
+                                            '& > div': {
+                                                pl: 0,
+                                            },
+                                        },
+                                        '&:last-child': {
+                                            '& > div': {
+                                                borderRight: 'none',
+                                                pr: 0,
+                                            },
+                                        },
+                                    },
+                                }}
+                            >
+                                <Grid item xs={4}>
+                                    <Stack gap={3}>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Company
+                                            </Typography>
+                                            <Typography fontSize={14}>Chevron</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Contact Name
+                                            </Typography>
+                                            <Typography fontSize={14}>Robert Penniwhacher</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Contact Email
+                                            </Typography>
+                                            <Typography fontSize={14}>Robert.Penniwhacher@chevron.com</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Address 1
+                                            </Typography>
+                                            <Typography fontSize={14}>2500 West Houston Parkway</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Address 2
+                                            </Typography>
+                                            <Typography fontSize={14}>Suite 2500</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                City
+                                            </Typography>
+                                            <Typography fontSize={14}>Houston</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                State
+                                            </Typography>
+                                            <Typography fontSize={14}>Texas</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Zip Code
+                                            </Typography>
+                                            <Typography fontSize={14}>77346-3112</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Mobile Number
+                                            </Typography>
+                                            <Typography fontSize={14}>832-568-8989</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Phone Number
+                                            </Typography>
+                                            <Typography fontSize={14}>832-568-8989</Typography>
+                                        </Stack>
+                                    </Stack>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Stack gap={3}>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                TAX ID
+                                            </Typography>
+                                            <Typography fontSize={14}>16468406846</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Net Terms
+                                            </Typography>
+                                            <Typography fontSize={14}>Net 60</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Dealer
+                                            </Typography>
+                                            <Typography fontSize={14}>Trailer Reseller</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Billing Contact
+                                            </Typography>
+                                            <Typography fontSize={14}>Robert Penniwhacher</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Billing Email
+                                            </Typography>
+                                            <Typography fontSize={14}>Robert.Penniwhacher@chevron.com</Typography>
+                                        </Stack>
+                                        <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
+                                            <Typography color={'#AAB0BC'} fontSize={14}>
+                                                Phone Number
+                                            </Typography>
+                                            <Typography fontSize={14}>832-568-8989</Typography>
+                                        </Stack>
+                                    </Stack>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Stack>
+                )}
                 {activeTab === 'users' && (
-                    <>
-                        <Typography mb={2} fontWeight={700}>
-                            User Manager
-                        </Typography>
-                        <Stack direction={'row'} spacing={3} alignItems={'flex-end'} justifyContent={'space-between'}>
-                            <Stack direction={'row'} spacing={6}>
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Total Enrolled</Typography>
-                                    <Stack direction={'row'} spacing={2} alignItems={'baseline'}>
-                                        <Typography fontSize={30} fontWeight={700}>
-                                            125
-                                        </Typography>
-                                        <Typography>Devices</Typography>
-                                    </Stack>
-                                </Stack>
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Active Users</Typography>
-                                    <Typography fontSize={30} fontWeight={700}>
-                                        100
-                                    </Typography>
-                                </Stack>
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Disabled</Typography>
-                                    <Typography fontSize={30} fontWeight={700}>
-                                        25
-                                    </Typography>
-                                </Stack>
-                                <Box width={'1px'} bgcolor={'#DBDDE2'} />
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Admin Users</Typography>
-                                    <Typography fontSize={30} fontWeight={700}>
-                                        10
-                                    </Typography>
-                                </Stack>
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Standard Users</Typography>
-                                    <Typography fontSize={30} fontWeight={700}>
-                                        115
-                                    </Typography>
-                                </Stack>
-                            </Stack>
-                            <SearchInput
-                                sx={{
-                                    border: '1px solid #DBDDE2',
-                                }}
-                            />
-                        </Stack>
-                    </>
+                    <Stack
+                        flex={1}
+                        width={'100% + 24px'}
+                        sx={{
+                            border: '1px solid #E2E2EA',
+                            borderRadius: '8px 0 0 8px',
+                            borderRight: 0,
+                        }}
+                        overflow={'hidden'}
+                        position={'relative'}
+                    >
+                        <DefaultDataGrid columns={usersColumns} rows={usersRows} />
+                    </Stack>
                 )}
-
-                {activeTab === 'sensors' && (
-                    <>
-                        <Typography mb={2} fontWeight={700}>
-                            Sensor Fleet
-                        </Typography>
-                        <Stack direction={'row'} spacing={3} alignItems={'flex-end'} justifyContent={'space-between'}>
-                            <Stack direction={'row'} spacing={6}>
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Total Registered</Typography>
-                                    <Stack direction={'row'} spacing={2} alignItems={'baseline'}>
-                                        <Typography fontSize={30} fontWeight={700}>
-                                            520
-                                        </Typography>
-                                        <Typography>Devices</Typography>
-                                    </Stack>
-                                </Stack>
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Activated</Typography>
-                                    <Typography fontSize={30} fontWeight={700}>
-                                        500
-                                    </Typography>
-                                </Stack>
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Deactivated</Typography>
-                                    <Typography fontSize={30} fontWeight={700}>
-                                        25
-                                    </Typography>
-                                </Stack>
-                                <Box width={'1px'} bgcolor={'#DBDDE2'} />
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Online</Typography>
-                                    <Typography fontSize={30} fontWeight={700}>
-                                        500
-                                    </Typography>
-                                </Stack>
-                                <Stack spacing={2}>
-                                    <Typography color={'#A0A3A6'}>Offlline</Typography>
-                                    <Typography fontSize={30} fontWeight={700}>
-                                        20
-                                    </Typography>
-                                </Stack>
-                            </Stack>
-                            <SearchInput
-                                sx={{
-                                    border: '1px solid #DBDDE2',
-                                }}
-                            />
-                        </Stack>
-                    </>
+                {activeTab === 'groups' && (
+                    <Stack
+                        flex={1}
+                        width={'100% + 24px'}
+                        sx={{
+                            border: '1px solid #E2E2EA',
+                            borderRadius: '8px 0 0 8px',
+                            borderRight: 0,
+                        }}
+                        overflow={'hidden'}
+                        position={'relative'}
+                    >
+                        <DefaultDataGrid columns={groupsColumns} rows={groupsRows} />
+                    </Stack>
                 )}
-            </Box>
-            <Box flex={1} border={'1px solid #DBDDE2'} mt={'-1px'}>
-                {activeTab === 'users' && <DefaultDataGrid columns={columnsUsers} rows={rowsUsers} />}
-                {activeTab === 'sensors' && <DefaultDataGrid columns={columns} rows={rows} />}
-            </Box>
-            <Popup
-                isOpened={activeTab === 'users' && isOpenedUserDetails}
-                width={700}
-                bgcolor={'common.white'}
-                sx={{
-                    bottom: 20,
-                    right: 20,
-                    border: '1px solid #DBDDE2',
-                    borderColor: '#DBDDE2',
-                    borderRadius: '10px',
-                }}
-            >
-                <Stack px={3} pt={3} pb={3} gap={'32px'} height={'100%'} alignItems={'flex-start'}>
-                    <Typography fontSize={20}>User Details</Typography>
-                    <Box width={'100%'}>
-                        <Grid spacing={3} container>
-                            <Grid item xs={4}>
-                                <DefaultInput label={'First Name'} />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <DefaultInput label={'Last Name'} />
-                            </Grid>
-                            <Grid item xs={4} />
-                            <Grid item xs={4}>
-                                <DefaultSelect helperText={'Role'} />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <DefaultSelect helperText={'Status'} />
-                            </Grid>
-                            <Grid item xs={4} />
-                            <Grid item xs={4}>
-                                <DefaultInput label={'Mobile'} />
-                            </Grid>
-                            <Grid item xs={8}>
-                                <DefaultInput label={'Email'} />
-                            </Grid>
-                        </Grid>
-                    </Box>
-                    <Box height={'1px'} width={'80%'} border={'1px solid #DBDDE2'} />
-                    <Box width={'100%'}>
-                        <Grid spacing={3} container>
-                            <Grid item xs={4}>
-                                <DefaultInput label={'Password'} type={'password'} />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <DefaultInput label={'Confirm Password'} type={'password'} />
-                            </Grid>
-                        </Grid>
-                    </Box>
-                    <Box height={'1px'} width={'80%'} border={'1px solid #DBDDE2'} />
-                    <Stack spacing={1}>
-                        <Typography fontWeight={700}>Invitation Email</Typography>
-                        <ButtonBase
-                            sx={{
-                                bgcolor: 'blue.light',
-                                px: 3,
-                                py: 1,
-                                borderRadius: '5px',
-                                fontWeight: 700,
-                            }}
-                        >
-                            Send
-                        </ButtonBase>
+                {activeTab === 'asset-configuration' && configurationTab === 'categories' && (
+                    <Stack
+                        flex={1}
+                        width={'100% + 24px'}
+                        sx={{
+                            border: '1px solid #E2E2EA',
+                            borderRadius: '8px 0 0 8px',
+                            borderRight: 0,
+                        }}
+                        overflow={'hidden'}
+                        position={'relative'}
+                    >
+                        <DefaultDataGrid columns={categoriesColumns} rows={categoriesRows} />
                     </Stack>
-                    <Stack direction={'row'} spacing={1} mt={'auto'} width={'100%'}>
-                        <Box flexGrow={1}>
-                            <DefaultButton onClick={() => setIsOpenedUserDetails(false)} color={'error'}>
-                                Delete
-                            </DefaultButton>
-                        </Box>
-                        <DefaultButton onClick={() => setIsOpenedUserDetails(false)}>Cancel</DefaultButton>
-                        <DefaultButton color={'success'} onClick={() => setIsOpenedUserDetails(false)}>
-                            Save
-                        </DefaultButton>
+                )}
+                {activeTab === 'asset-configuration' && configurationTab === 'types' && (
+                    <Stack
+                        flex={1}
+                        width={'100% + 24px'}
+                        sx={{
+                            border: '1px solid #E2E2EA',
+                            borderRadius: '8px 0 0 8px',
+                            borderRight: 0,
+                        }}
+                        overflow={'hidden'}
+                        position={'relative'}
+                    >
+                        <DefaultDataGrid columns={typesColumns} rows={typesRows} />
                     </Stack>
-                </Stack>
-            </Popup>
-
-            <Popup
-                isOpened={activeTab === 'sensors' && isOpenedSensorDetails}
-                width={700}
-                bgcolor={'common.white'}
-                sx={{
-                    bottom: 20,
-                    right: 20,
-                    border: '1px solid #DBDDE2',
-                    borderColor: '#DBDDE2',
-                    borderRadius: '10px',
-                }}
-            >
-                <Stack px={3} pt={3} pb={3} gap={'32px'} height={'100%'} alignItems={'flex-start'}>
-                    <Typography fontSize={20}>Sensor Details</Typography>
-                    <Stack spacing={3} maxWidth={420} width={'100%'}>
-                        <DefaultSelect helperText={'Manufacturer'} />
-                        <DefaultSelect helperText={'Sensor Model'} />
-                        <DefaultInput label={'Sensor ID (MAC)'} />
-                    </Stack>
-                    <Stack spacing={1}>
-                        <Typography fontWeight={700}>Device State</Typography>
-                        <Stack direction={'row'} spacing={3} justifyContent={'space-between'} alignItems={'center'}>
-                            <Typography>Online</Typography>
-                            <ColorStatus code={1} />
-                        </Stack>
-                    </Stack>
-                    <Stack spacing={1}>
-                        <Typography fontWeight={700}>Last Transmission</Typography>
-                        <Typography>12-07-2023 12:09pm</Typography>
-                    </Stack>
-                    <Stack spacing={1}>
-                        <Typography fontWeight={700}>Assigned Machine</Typography>
-                        <Box bgcolor={'blue.light'} px={3} py={1} borderRadius={'5px'}>
-                            <Typography>Mazak CNC 2500</Typography>
-                        </Box>
-                    </Stack>
-                    <Stack direction={'row'} spacing={1} mt={'auto'} width={'100%'}>
-                        <Box flexGrow={1}>
-                            <DefaultButton onClick={() => setIsOpenedSensorDetails(false)} color={'error'}>
-                                Delete
-                            </DefaultButton>
-                        </Box>
-                        <DefaultButton onClick={() => setIsOpenedSensorDetails(false)}>Cancel</DefaultButton>
-                        <DefaultButton color={'success'} onClick={() => setIsOpenedSensorDetails(false)}>
-                            Save
-                        </DefaultButton>
-                    </Stack>
-                </Stack>
-            </Popup>
+                )}
+            </Stack>
         </Stack>
     );
 };

@@ -10,6 +10,10 @@ import { tabs } from './data/tabs.js';
 import { Tabs } from '@/ui/Tabs/index.js';
 import { Status } from '@/modules/Asset/Status/Status.jsx';
 import { LocationsMap } from '@/modules/Asset/LocationsMap/LocationsMap.jsx';
+import { Trips } from '@/modules/Asset/Trips/Trips.jsx';
+import { Events } from '@/modules/Asset/Events/Events.jsx';
+import { Details } from '@/modules/Asset/Details/Details.jsx';
+import { Device } from '@/modules/Asset/Device/Device.jsx';
 
 export const Asset = () => {
     const [activeTab, setActiveTab] = useState(tabs[0].value);
@@ -96,6 +100,10 @@ export const Asset = () => {
             <Stack px={3} pb={3} pt={1} flex={1}>
                 {activeTab === 'status' && <Status />}
                 {activeTab === 'map' && <LocationsMap />}
+                {activeTab === 'trips' && <Trips />}
+                {activeTab === 'events' && <Events />}
+                {activeTab === 'details' && <Details />}
+                {activeTab === 'device' && <Device />}
             </Stack>
         </Stack>
     );

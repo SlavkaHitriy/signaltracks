@@ -69,7 +69,7 @@ export const Tabs = ({ data, activeTab, setActiveTab, inline, small }) => {
                                     cursor: 'pointer',
                                 }}
                                 key={idx}
-                                direction={'row'}
+                                direction={item.isIconRight ? 'row-reverse' : 'row'}
                                 alignItems={'center'}
                                 justifyContent={'center'}
                                 flex={small ? 1 : 'unset'}

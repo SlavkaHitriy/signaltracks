@@ -114,7 +114,7 @@ export const LocationsMap = () => {
                                 <Grid item xs={6}>
                                     <Stack gap={0.5}>
                                         <Stack direction={'row'} gap={2}>
-                                            <Typography>05 hrs 56 m</Typography>
+                                            <Typography fontWeight={500}>05 hrs 56 m</Typography>
                                             <AccessTimeFilled />
                                         </Stack>
                                         <Typography fontSize={13} color={'#A0A3A6'}>
@@ -124,7 +124,7 @@ export const LocationsMap = () => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Stack gap={0.5}>
-                                        <Typography>In Transit</Typography>
+                                        <Typography fontWeight={500}>In Transit</Typography>
                                         <Typography fontSize={13} color={'#A0A3A6'}>
                                             Movement
                                         </Typography>
@@ -132,7 +132,7 @@ export const LocationsMap = () => {
                                 </Grid>
                                 <Grid item xs={4}>
                                     <Stack gap={0.5}>
-                                        <Typography>20.5</Typography>
+                                        <Typography fontWeight={500}>20.5</Typography>
                                         <Typography fontSize={13} color={'#A0A3A6'}>
                                             Speed
                                         </Typography>
@@ -140,7 +140,7 @@ export const LocationsMap = () => {
                                 </Grid>
                                 <Grid item xs={4}>
                                     <Stack gap={0.5}>
-                                        <Typography>68.5 °F</Typography>
+                                        <Typography fontWeight={500}>68.5 °F</Typography>
                                         <Typography fontSize={13} color={'#A0A3A6'}>
                                             Temp
                                         </Typography>
@@ -148,7 +148,7 @@ export const LocationsMap = () => {
                                 </Grid>
                                 <Grid item xs={4}>
                                     <Stack gap={0.5}>
-                                        <Typography>10 m</Typography>
+                                        <Typography fontWeight={500}>10 m</Typography>
                                         <Typography fontSize={13} color={'#A0A3A6'}>
                                             Altitude
                                         </Typography>
@@ -167,7 +167,7 @@ export const LocationsMap = () => {
                         </Stack>
                         <Stack direction={'row'} gap={1} alignItems={'center'}>
                             <Typography width={80} flexShrink={0} color={'#A0A3A6'} fontSize={12}>
-                                Alerts
+                                Select Tool
                             </Typography>
                             <Stack
                                 flex={1}

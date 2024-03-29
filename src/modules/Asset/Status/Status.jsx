@@ -31,20 +31,20 @@ export const Status = () => {
         <Stack gap={4}>
             <Stack direction={'row'} gap={6}>
                 <Stack gap={1}>
-                    <Typography>20.5</Typography>
+                    <Typography fontWeight={500}>20.5</Typography>
                     <Typography fontSize={13} color={'#A0A3A6'}>
                         Speed
                     </Typography>
                 </Stack>
                 <Stack gap={1}>
-                    <Typography>68.5 °F</Typography>
+                    <Typography fontWeight={500}>68.5 °F</Typography>
                     <Typography fontSize={13} color={'#A0A3A6'}>
                         Temp
                     </Typography>
                 </Stack>
                 <Stack gap={1}>
                     <Stack direction={'row'} gap={2}>
-                        <Typography>05 hrs 56 m</Typography>
+                        <Typography fontWeight={500}>05 hrs 56 m</Typography>
                         <AccessTimeFilled />
                     </Stack>
                     <Typography fontSize={13} color={'#A0A3A6'}>
@@ -52,13 +52,13 @@ export const Status = () => {
                     </Typography>
                 </Stack>
                 <Stack gap={1}>
-                    <Typography>In Transit</Typography>
+                    <Typography fontWeight={500}>In Transit</Typography>
                     <Typography fontSize={13} color={'#A0A3A6'}>
                         Movement
                     </Typography>
                 </Stack>
                 <Stack gap={1}>
-                    <Typography>2800 West Broadway Dr. Houston, TX 77336-3312</Typography>
+                    <Typography fontWeight={500}>2800 West Broadway Dr. Houston, TX 77336-3312</Typography>
                     <Typography fontSize={13} color={'#A0A3A6'}>
                         Last Updated: 02/23/2024 1:56PM CST
                     </Typography>
@@ -186,7 +186,9 @@ export const Status = () => {
                             <InternalTemperature />
                         </Box>
                         <Stack width={260} flexShrink={0} gap={3}>
-                            <Typography fontSize={20}>Avg. Readings</Typography>
+                            <Typography fontSize={20} fontWeight={500}>
+                                Avg. Readings
+                            </Typography>
                             <Stack gap={1}>
                                 <Typography>68.5 °F</Typography>
                                 <Stack direction={'row'} gap={3} alignItems={'center'} justifyContent={'space-between'}>

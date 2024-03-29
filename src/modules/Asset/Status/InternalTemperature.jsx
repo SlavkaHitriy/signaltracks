@@ -156,20 +156,22 @@ export const InternalTemperature = () => {
                 <Stack direction={'row'} gap={3} mb={1}>
                     <Stack direction={'row'} gap={1} alignItems={'center'}>
                         <Box width={8} height={8} borderRadius={'50%'} bgcolor={'secondary.main'} />
-                        <Typography fontSize={14}>Minimum</Typography>
+                        <Typography fontSize={12}>Minimum</Typography>
                     </Stack>
                     <Stack direction={'row'} gap={1} alignItems={'center'}>
                         <Box width={8} height={8} borderRadius={'50%'} bgcolor={'green.main'} />
-                        <Typography fontSize={14}>Average</Typography>
+                        <Typography fontSize={12}>Average</Typography>
                     </Stack>
                     <Stack direction={'row'} gap={1} alignItems={'center'}>
                         <Box width={8} height={8} borderRadius={'50%'} bgcolor={'red.main'} />
-                        <Typography fontSize={14}>Maximum</Typography>
+                        <Typography fontSize={12}>Maximum</Typography>
                     </Stack>
                 </Stack>
             </Stack>
             <Stack gap={4} p={3} border={'1px solid #EBEDF0'} borderRadius={'12px'}>
-                <Typography fontSize={20}>Internal Temperature</Typography>
+                <Typography fontSize={20} fontWeight={500}>
+                    Internal Temperature
+                </Typography>
                 <Box height={300} mb={3}>
                     <Box
                         sx={{

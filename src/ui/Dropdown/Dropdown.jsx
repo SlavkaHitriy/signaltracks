@@ -1,6 +1,5 @@
-import { Box, Menu, MenuItem } from '@mui/material';
+import { Box, Menu } from '@mui/material';
 import { useState } from 'react';
-import { KeyboardArrowDown } from '@mui/icons-material';
 import styles from './index.module.scss';
 import { ArrowDownIcon } from '@/assets/icons/ArrowDownIcon.jsx';
 

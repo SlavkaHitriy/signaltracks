@@ -3,7 +3,7 @@ import logoSmall from '@/assets/images/logo-small.svg';
 import { SidebarItem } from '@/components/Sidebar/SidebarItem';
 import { theme } from '@/core/theme/theme';
 import { Box, Stack, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { mainMenu, systemMenu } from './data/menu';
 import { BurgerIcon } from '@/assets/icons/BurgerIcon.jsx';

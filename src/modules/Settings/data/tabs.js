@@ -1,27 +1,18 @@
 export const tabs = [
     {
-        id: 1,
-        label: 'Users',
-        value: 'users',
-    },
-    {
-        id: 2,
-        label: 'Company',
+        title: 'Company',
         value: 'company',
     },
     {
-        id: 3,
-        label: 'Sites',
-        value: 'sites',
+        title: 'Users',
+        value: 'users',
     },
     {
-        id: 4,
-        label: 'Gateways',
-        value: 'gateways',
+        title: 'Groups',
+        value: 'groups',
     },
     {
-        id: 5,
-        label: 'Sensors',
-        value: 'sensors',
+        title: 'Asset Configuration',
+        value: 'asset-configuration',
     },
 ];
