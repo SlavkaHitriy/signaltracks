@@ -29,7 +29,7 @@ export const Dropdown = ({ children, customChildren, ...otherProps }) => {
                 }}
                 {...otherProps}
             >
-                sdflkjfsd
+                Test
             </Menu>
         </div>
     );

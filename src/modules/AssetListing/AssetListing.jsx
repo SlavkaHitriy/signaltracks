@@ -8,8 +8,11 @@ import { DefaultSelect } from '@/ui/DefaultSelect/index.js';
 import { PlusIcon } from '@/assets/icons/PlusIcon.jsx';
 import { DefaultDataGrid } from '@/ui/DefaultDataGrid/index.js';
 import { columns, rows } from './data/assets.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export const AssetListing = () => {
+    const navigate = useNavigate();
+
     return (
         <Stack width={'100%'}>
             <Stack p={3} gap={2}>
@@ -109,6 +112,7 @@ export const AssetListing = () => {
                             bgcolor: 'secondary.main',
                             borderRadius: '6px',
                         }}
+                        onClick={() => navigate('/asset-new')}
                     >
                         <PlusIcon />
                         <Typography fontSize={14} color={'common.white'}>

@@ -1,14 +1,26 @@
-import { Box, TextField } from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
 import React from 'react';
 
-export const DefaultInput = ({ label, placeholder, fixedValue, ...otherProps }) => {
+export const DefaultInput = ({ label, placeholder, fixedValue, helperText, helperTextColor, sx, isTextarea, ...otherProps }) => {
     return (
         <Box position={'relative'} width={'100%'}>
+            {helperText && (
+                <Typography
+                    color={helperTextColor || '#A8A8A7'}
+                    fontSize={12}
+                    sx={{
+                        alignSelf: 'flex-start',
+                    }}
+                >
+                    {helperText}
+                </Typography>
+            )}
             {fixedValue && (
                 <Box
                     position={'absolute'}
                     top={'50%'}
                     left={12}
+                    zIndex={3}
                     sx={{
                         fontSize: 14,
                         transform: 'translateY(calc(-50% - 2px))',
@@ -17,6 +29,7 @@ export const DefaultInput = ({ label, placeholder, fixedValue, ...otherProps }) 
                     {fixedValue}
                 </Box>
             )}
+
             <TextField
                 label={label}
                 variant='standard'
@@ -24,6 +37,8 @@ export const DefaultInput = ({ label, placeholder, fixedValue, ...otherProps }) 
                     shrink: true,
                 }}
                 placeholder={placeholder}
+                multiline={isTextarea}
+                minRows={isTextarea ? 5 : undefined}
                 sx={{
                     width: '100%',
                     overflow: 'hidden',
@@ -40,16 +55,18 @@ export const DefaultInput = ({ label, placeholder, fixedValue, ...otherProps }) 
                     },
                     '.MuiInput-input': {
                         fontSize: 14,
-                        height: 40,
-                        py: 0,
+                        height: isTextarea ? 'auto' : 40,
+                        py: isTextarea ? 2 : 0,
                         pr: 2,
                         pl: fixedValue ? 6 : 2,
                         border: '1px solid #E2E2EA',
                         borderRadius: '6px',
                         boxSizing: 'border-box',
+                        bgcolor: 'common.white',
                     },
                     '.MuiInputBase-root': {
                         mt: 0,
+                        py: isTextarea && 0,
                         '&::before': {
                             border: 'none',
                         },
@@ -59,6 +76,7 @@ export const DefaultInput = ({ label, placeholder, fixedValue, ...otherProps }) 
                             },
                         },
                     },
+                    ...sx,
                 }}
                 {...otherProps}
             />

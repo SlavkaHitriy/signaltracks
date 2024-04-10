@@ -55,6 +55,8 @@ export const SearchInput = ({ sx }) => {
                     },
                     '.MuiInputBase-input': {
                         fontSize: 14,
+                        bgcolor: '#F6F8FA',
+                        borderRight: 0,
                     },
                 }}
             />

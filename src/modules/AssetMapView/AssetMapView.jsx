@@ -13,8 +13,10 @@ import { Fullscreen, FullscreenExit } from '@mui/icons-material';
 import { useSetRecoilState } from 'recoil';
 import { sidebarOpened } from '@/core/store/index.js';
 import { MapView } from '@/components/Map/MapView.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export const AssetMapView = () => {
+    const navigate = useNavigate();
     const [isFullMap, setIsFullMap] = useState(false);
     const setIsOpenedSidebar = useSetRecoilState(sidebarOpened);
 
@@ -121,6 +123,7 @@ export const AssetMapView = () => {
                             bgcolor: 'secondary.main',
                             borderRadius: '6px',
                         }}
+                        onClick={() => navigate('/asset-new')}
                     >
                         <PlusIcon />
                         <Typography fontSize={14} color={'common.white'}>
