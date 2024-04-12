@@ -7,6 +7,8 @@ import { AssetListing } from '@/modules/AssetListing/index.js';
 import { Asset } from '@/modules/Asset/index.js';
 import { AssetNew } from '@/modules/AssetNew/index.js';
 import { Login } from '@/modules/Login/index.js';
+import { Events } from '@/modules/Events/index.js';
+import { Devices } from '@/modules/Devices/index.js';
 
 export const App = () => {
     const location = useLocation();
@@ -22,6 +24,8 @@ export const App = () => {
                         <Route path='/asset/1' element={<Asset />} />
                         <Route path='/asset-listing' element={<AssetListing />} />
                         <Route path='/settings' element={<Settings />} />
+                        <Route path='/events' element={<Events />} />
+                        <Route path='/devices' element={<Devices />} />
                         <Route path='/login' element={<Login />} />
 
                         <Route path='*' element={<Navigate to='/login' replace />} />
