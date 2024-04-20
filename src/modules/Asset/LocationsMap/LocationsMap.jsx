@@ -163,7 +163,7 @@ export const LocationsMap = () => {
                             <Typography width={80} flexShrink={0} color={'#A0A3A6'} fontSize={12}>
                                 Fence Name
                             </Typography>
-                            <DefaultInput placeholder={'Enter name...'} />
+                            <DefaultInput placeholder={'Enter name...'} name={'fenceName'} />
                         </Stack>
                         <Stack direction={'row'} gap={1} alignItems={'center'}>
                             <Typography width={80} flexShrink={0} color={'#A0A3A6'} fontSize={12}>
@@ -199,7 +199,7 @@ export const LocationsMap = () => {
                                 }}
                             >
                                 <Typography fontSize={14}>Activate Alerts</Typography>
-                                <DefaultToggle defaultChecked />
+                                <DefaultToggle name={'alerts'} />
                             </Stack>
                         </Stack>
                         <Stack direction={'row'} gap={1} alignItems={'center'}>
@@ -215,6 +215,7 @@ export const LocationsMap = () => {
                                     },
                                 }}
                                 defaultValue={'All Users'}
+                                name={'sendTo'}
                             />
                         </Stack>
                         <Stack direction={'row'} gap={1} justifyContent={'flex-end'}>

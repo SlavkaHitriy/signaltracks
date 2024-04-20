@@ -1,8 +1,17 @@
 import { FormControl, MenuItem, Select, Typography } from '@mui/material';
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { ExpandMore } from '@mui/icons-material';
+import { useField } from 'formik';
 
-export const DefaultSelect = ({ sx, label, helperText, helperTextColor, defaultValue = 'Active' }) => {
+export const DefaultSelect = memo(({ sx, label, helperText, helperTextColor, defaultValue = 'Active', name }) => {
+    const [field, _, { setValue }] = useField(name);
+
+    useEffect(() => {
+        if (defaultValue) {
+            setValue(defaultValue);
+        }
+    }, [defaultValue]);
+
     return (
         <FormControl variant='standard' sx={{ minWidth: '100%', alignItems: 'center', ...sx }}>
             <>
@@ -42,6 +51,7 @@ export const DefaultSelect = ({ sx, label, helperText, helperTextColor, defaultV
                         },
                     }}
                     defaultValue={defaultValue}
+                    {...field}
                 >
                     <MenuItem value={defaultValue}>{defaultValue}</MenuItem>
                     <MenuItem value={`${defaultValue} 1`}>{defaultValue} 1</MenuItem>
@@ -50,4 +60,4 @@ export const DefaultSelect = ({ sx, label, helperText, helperTextColor, defaultV
             </>
         </FormControl>
     );
-};
+});

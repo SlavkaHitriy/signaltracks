@@ -3,7 +3,7 @@ import { DefaultInput } from '@/ui/DefaultInput';
 import { DefaultIconButton } from '@/ui/DefaultIconButton';
 import { SearchIcon } from '@/assets/icons/SearchIcon.jsx';
 
-export const SearchInput = ({ sx }) => {
+export const SearchInput = ({ sx, name }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
     };
@@ -40,6 +40,7 @@ export const SearchInput = ({ sx }) => {
             />
             <DefaultInput
                 placeholder={'Search...'}
+                name={name}
                 sx={{
                     width: '100%',
                     '.MuiInputBase-root::before': {

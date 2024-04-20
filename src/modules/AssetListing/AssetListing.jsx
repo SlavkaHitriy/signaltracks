@@ -9,9 +9,22 @@ import { PlusIcon } from '@/assets/icons/PlusIcon.jsx';
 import { DefaultDataGrid } from '@/ui/DefaultDataGrid/index.js';
 import { columns, rows } from './data/assets.jsx';
 import { useNavigate } from 'react-router-dom';
+import { FormikProvider, useFormik } from 'formik';
 
 export const AssetListing = () => {
     const navigate = useNavigate();
+    const formik = useFormik({
+        initialValues: {
+            search: '',
+            groups: '',
+            status: '',
+            devices: '',
+        },
+        onSubmit: (values) => {
+            console.log(values);
+        },
+        validateOnChange: false,
+    });
 
     return (
         <Stack width={'100%'}>
@@ -90,36 +103,38 @@ export const AssetListing = () => {
                         </Stack>
                     </Stack>
                 </Stack>
-                <Stack direction={'row'} gap={2}>
-                    <SearchInput />
-                    <Box maxWidth={200} width={'100%'}>
-                        <DefaultSelect defaultValue={'Groups'} />
-                    </Box>
-                    <Box maxWidth={200} width={'100%'}>
-                        <DefaultSelect defaultValue={'Status'} />
-                    </Box>
-                    <Box maxWidth={200} width={'100%'}>
-                        <DefaultSelect defaultValue={'Devices'} />
-                    </Box>
-                    <ButtonBase
-                        sx={{
-                            height: 30,
-                            px: 2,
-                            py: 1,
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 1,
-                            bgcolor: 'secondary.main',
-                            borderRadius: '6px',
-                        }}
-                        onClick={() => navigate('/asset-new')}
-                    >
-                        <PlusIcon />
-                        <Typography fontSize={14} color={'common.white'}>
-                            New Asset
-                        </Typography>
-                    </ButtonBase>
-                </Stack>
+                <FormikProvider value={formik}>
+                    <Stack direction={'row'} gap={2}>
+                        <SearchInput name={'search'} />
+                        <Box maxWidth={200} width={'100%'}>
+                            <DefaultSelect name={'groups'} defaultValue={'Groups'} />
+                        </Box>
+                        <Box maxWidth={200} width={'100%'}>
+                            <DefaultSelect name={'status'} defaultValue={'Status'} />
+                        </Box>
+                        <Box maxWidth={200} width={'100%'}>
+                            <DefaultSelect name={'devices'} defaultValue={'Devices'} />
+                        </Box>
+                        <ButtonBase
+                            sx={{
+                                height: 30,
+                                px: 2,
+                                py: 1,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 1,
+                                bgcolor: 'secondary.main',
+                                borderRadius: '6px',
+                            }}
+                            onClick={() => navigate('/asset-new')}
+                        >
+                            <PlusIcon />
+                            <Typography fontSize={14} color={'common.white'}>
+                                New Asset
+                            </Typography>
+                        </ButtonBase>
+                    </Stack>
+                </FormikProvider>
             </Stack>
             <Stack flex={1} borderTop={'1px solid #E1E3E8'} direction={'row'}>
                 <DefaultDataGrid pageItems={10} pageSizeOptions={[10, 25, 50]} rows={rows} columns={columns} />

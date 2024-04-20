@@ -59,7 +59,7 @@ export const Device = () => {
                 position={'relative'}
             >
                 <Box maxWidth={200} mb={4}>
-                    <DefaultSelect defaultValue={'808654 (primary)'} />
+                    <DefaultSelect defaultValue={'808654 (primary)'} name={'device'} />
                 </Box>
                 <Box>
                     <Grid
@@ -110,8 +110,9 @@ export const Device = () => {
                                             </Typography>
                                         </Stack>
                                         <Stack direction={'row'} gap={3}>
-                                            <DefaultInput fixedValue={'Min:'} defaultValue={'65'} />
-                                            <DefaultInput fixedValue={'Max:'} defaultValue={'102'} />
+                                            <DefaultInput fixedValue={'Min:'} name={'minTemperature'} />
+
+                                            <DefaultInput fixedValue={'Max:'} name={'maxTemperature'} />
                                         </Stack>
                                     </Stack>
                                     <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
@@ -122,8 +123,8 @@ export const Device = () => {
                                             </Typography>
                                         </Stack>
                                         <Stack direction={'row'} gap={3}>
-                                            <DefaultInput fixedValue={'Min:'} defaultValue={'20.5'} />
-                                            <DefaultInput fixedValue={'Max:'} defaultValue={'65.0'} />
+                                            <DefaultInput fixedValue={'Min:'} name={'minSpeed'} />
+                                            <DefaultInput fixedValue={'Max:'} name={'maxSpeed'} />
                                         </Stack>
                                     </Stack>
                                 </Stack>

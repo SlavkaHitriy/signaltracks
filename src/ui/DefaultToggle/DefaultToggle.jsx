@@ -1,6 +1,9 @@
 import { Switch } from '@mui/material';
+import { useField } from 'formik';
 
-export const DefaultToggle = ({ defaultChecked }) => {
+export const DefaultToggle = ({ name }) => {
+    const [field] = useField(name);
+
     return (
         <Switch
             sx={{
@@ -25,7 +28,9 @@ export const DefaultToggle = ({ defaultChecked }) => {
                     top: '0px',
                 },
             }}
-            defaultChecked={defaultChecked}
+            checked={field.value}
+            onChange={field.onChange}
+            name={name}
         />
     );
 };
