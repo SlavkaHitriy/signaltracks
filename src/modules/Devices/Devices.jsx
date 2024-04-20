@@ -1,5 +1,5 @@
 import { Box, ButtonBase, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { DefaultCircularProgress } from '@/ui/DefaultCircularProgress/index.js';
 import { ArrowIcon } from '@/assets/icons/ArrowIcon.jsx';
 import { Dropdown } from '@/ui/Dropdown/index.js';
@@ -9,14 +9,23 @@ import { PlusIcon } from '@/assets/icons/PlusIcon.jsx';
 import { DefaultDataGrid } from '@/ui/DefaultDataGrid/index.js';
 import { columns, rows } from './data/devices.jsx';
 import { FormikProvider, useFormik } from 'formik';
+import { Modal } from '@/components/Modal/Modal.jsx';
+import { DeviceDetailsModal } from '@/modules/Devices/DeviceDetailsModal.jsx';
 
 export const Devices = () => {
+    const [deviceDetailsModal, setDeviceDetailsModal] = useState(false);
     const formik = useFormik({
         initialValues: {
             search: '',
             groups: '',
             status: '',
             devices: '',
+            deviceDetails: {
+                serialNumber: '',
+                deviceType: '',
+                expiration: '',
+                interval: '',
+            },
         },
         onSubmit: (values) => {
             console.log(values);
@@ -26,6 +35,9 @@ export const Devices = () => {
 
     return (
         <FormikProvider value={formik}>
+            <Modal isOpened={deviceDetailsModal} title={'Device Details'} onClose={() => setDeviceDetailsModal(false)}>
+                <DeviceDetailsModal />
+            </Modal>
             <Stack width={'100%'}>
                 <Stack p={3} gap={2}>
                     <Stack direction={'row'} gap={10} alignItems={'center'} mb={3}>
@@ -253,7 +265,13 @@ export const Devices = () => {
                     </Stack>
                 </Stack>
                 <Stack flex={1} borderTop={'1px solid #E1E3E8'} direction={'row'}>
-                    <DefaultDataGrid pageItems={10} pageSizeOptions={[10, 25, 50]} rows={rows} columns={columns} />
+                    <DefaultDataGrid
+                        pageItems={10}
+                        pageSizeOptions={[10, 25, 50]}
+                        rows={rows}
+                        columns={columns}
+                        onRowClick={() => setDeviceDetailsModal(true)}
+                    />
                 </Stack>
             </Stack>
         </FormikProvider>

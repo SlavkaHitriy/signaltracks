@@ -14,11 +14,20 @@ import { categoriesColumns, categoriesRows } from '@/modules/Settings/data/categ
 import { typesColumns, typesRows } from '@/modules/Settings/data/types.jsx';
 import { companyTabs } from '@/modules/Settings/data/companyTabs.js';
 import { FormikProvider, useFormik } from 'formik';
+import { Modal } from '@/components/Modal/Modal.jsx';
+import { UserDetailsModal } from '@/modules/Settings/UserDetailsModal.jsx';
+import { GroupDetailsModal } from '@/modules/Settings/GroupDetailsModal.jsx';
+import { AssetCategoryModal } from '@/modules/Settings/AssetCategoryModal.jsx';
+import { AssetTypeModal } from '@/modules/Settings/AssetTypeModal.jsx';
 
 export const Settings = () => {
     const [activeTab, setActiveTab] = useState(tabs[0].value);
     const [configurationTab, setConfigurationTab] = useState(configurationTabs[0].value);
     const [companyTab, setCompanyTab] = useState(companyTabs[0].value);
+    const [userDetailsModal, setUserDetailsModal] = useState(false);
+    const [groupDetailsModal, setGroupDetailsModal] = useState(false);
+    const [assetCategoryModal, setAssetCategoryModal] = useState(false);
+    const [assetTypeModal, setAssetTypeModal] = useState(false);
     const formik = useFormik({
         initialValues: {
             search: '',
@@ -27,6 +36,46 @@ export const Settings = () => {
             groupsSearch: '',
             assetsSearch: '',
             category: '',
+            userDetails: {
+                firstName: '',
+                lastName: '',
+                role: '',
+                status: '',
+                mobile: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+            },
+            groupDetails: {
+                groupName: '',
+                status: '',
+                description: '',
+                groupColor: {
+                    color1: true,
+                    color2: false,
+                    color3: false,
+                    color4: false,
+                    color5: false,
+                    color6: false,
+                    color7: false,
+                    color8: false,
+                    color9: false,
+                    color10: false,
+                    color11: false,
+                    color12: false,
+                },
+            },
+            assetCategory: {
+                groupName: '',
+                status: '',
+                description: '',
+            },
+            assetType: {
+                groupName: '',
+                category: '',
+                description: '',
+                status: '',
+            },
         },
         onSubmit: (values) => {
             console.log(values);
@@ -48,6 +97,18 @@ export const Settings = () => {
 
     return (
         <FormikProvider value={formik}>
+            <Modal isOpened={userDetailsModal} title={'User Details'} onClose={() => setUserDetailsModal(false)}>
+                <UserDetailsModal />
+            </Modal>
+            <Modal isOpened={groupDetailsModal} title={'Group Details'} onClose={() => setGroupDetailsModal(false)}>
+                <GroupDetailsModal />
+            </Modal>
+            <Modal isOpened={assetCategoryModal} title={'Asset Category'} onClose={() => setAssetCategoryModal(false)}>
+                <AssetCategoryModal />
+            </Modal>
+            <Modal isOpened={assetTypeModal} title={'Asset Type'} onClose={() => setAssetTypeModal(false)}>
+                <AssetTypeModal />
+            </Modal>
             <Stack flex={1}>
                 <Stack p={3} gap={2}>
                     <Stack direction={'row'} gap={4} justifyContent={'space-between'} alignItems={'center'}>
@@ -507,7 +568,11 @@ export const Settings = () => {
                             overflow={'hidden'}
                             position={'relative'}
                         >
-                            <DefaultDataGrid columns={usersColumns} rows={usersRows} />
+                            <DefaultDataGrid
+                                columns={usersColumns}
+                                rows={usersRows}
+                                onRowClick={() => setUserDetailsModal(true)}
+                            />
                         </Stack>
                     )}
                     {activeTab === 'groups' && (
@@ -522,7 +587,11 @@ export const Settings = () => {
                             overflow={'hidden'}
                             position={'relative'}
                         >
-                            <DefaultDataGrid columns={groupsColumns} rows={groupsRows} />
+                            <DefaultDataGrid
+                                columns={groupsColumns}
+                                rows={groupsRows}
+                                onRowClick={() => setGroupDetailsModal(true)}
+                            />
                         </Stack>
                     )}
                     {activeTab === 'asset-configuration' && configurationTab === 'categories' && (
@@ -537,7 +606,11 @@ export const Settings = () => {
                             overflow={'hidden'}
                             position={'relative'}
                         >
-                            <DefaultDataGrid columns={categoriesColumns} rows={categoriesRows} />
+                            <DefaultDataGrid
+                                columns={categoriesColumns}
+                                rows={categoriesRows}
+                                onRowClick={() => setAssetCategoryModal(true)}
+                            />
                         </Stack>
                     )}
                     {activeTab === 'asset-configuration' && configurationTab === 'types' && (
@@ -552,7 +625,7 @@ export const Settings = () => {
                             overflow={'hidden'}
                             position={'relative'}
                         >
-                            <DefaultDataGrid columns={typesColumns} rows={typesRows} />
+                            <DefaultDataGrid columns={typesColumns} rows={typesRows} onRowClick={() => setAssetTypeModal(true)} />
                         </Stack>
                     )}
                 </Stack>
