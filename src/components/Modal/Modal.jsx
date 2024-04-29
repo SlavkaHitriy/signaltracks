@@ -9,8 +9,10 @@ export const Modal = ({ isOpened, children, title, onClose }) => {
                 pt={3}
                 pb={2}
                 gap={4}
-                minHeight={'700px'}
+                overflowY={'auto'}
                 minWidth={'700px'}
+                height={'750px'}
+                maxHeight={'calc(100vh - 100px)'}
                 maxWidth={'700px'}
                 position={'fixed'}
                 zIndex={10}
