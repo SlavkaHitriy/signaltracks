@@ -69,6 +69,8 @@ export const AssetNew = () => {
             console.log(values);
         },
         validateOnChange: true,
+        validateOnMount: true,
+        validateOnBlur: true,
     });
 
     const goToNextTab = () => {
