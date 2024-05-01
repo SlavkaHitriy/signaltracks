@@ -7,10 +7,17 @@ import { DefaultInput } from '@/ui/DefaultInput/index.js';
 import { CheckCircle } from '@mui/icons-material';
 import { DefaultToggle } from '@/ui/DefaultToggle/DefaultToggle.jsx';
 import { FormikProvider, useFormik } from 'formik';
+import { object, string } from 'yup';
 
 export const AssetNew = () => {
     const [activeTab, setActiveTab] = useState(tabs[0].value);
+    const assetNewValidationSchema = object({
+        setupDetails: object({
+            assetName: string().required('Asset name is required'),
+        }),
+    });
     const formik = useFormik({
+        validationSchema: assetNewValidationSchema,
         initialValues: {
             setupDetails: {
                 assetName: 'Asset name',
@@ -61,7 +68,7 @@ export const AssetNew = () => {
         onSubmit: (values) => {
             console.log(values);
         },
-        validateOnChange: false,
+        validateOnChange: true,
     });
 
     const goToNextTab = () => {

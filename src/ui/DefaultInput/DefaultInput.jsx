@@ -4,7 +4,9 @@ import { useField } from 'formik';
 
 export const DefaultInput = memo(
     ({ label, placeholder, fixedValue, helperText, helperTextColor, sx, isTextarea, ...otherProps }) => {
-        const [field] = useField(otherProps.name);
+        const [field, meta] = useField(otherProps.name);
+
+        console.log('field error', meta.error);
 
         return (
             <Box position={'relative'} width={'100%'}>
